@@ -77,8 +77,6 @@ ORDER BY imdb_rating DESC
 
 -- 7. Which have a higher average rating, movies which are over two hours long or movies which are under two hours?
 
-select length_in_min
-FROM specs
 
 SELECT
   CASE WHEN length_in_min > 120 THEN 'Over 2 Hours' ELSE 'Under 2 Hours' END AS length_category,
