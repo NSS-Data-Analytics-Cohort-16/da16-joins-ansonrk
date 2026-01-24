@@ -34,7 +34,6 @@ where mpaa_rating = 'G'
 ORDER BY company_name DESC
 
 
-
 -- 4. Write a query that returns, for each distributor in the distributors table, the distributor name and the number of movies associated with that distributor in the movies table.
 --Your result set should include all of the distributors, whether or not they have any movies in the movies table.
 --distributors_name, specs.film_title,
@@ -45,7 +44,7 @@ LEFT JOIN specs
 ON distributors.distributor_id = domestic_distributor_id
 where film_title is not null
 group by company_name
-order by company_name DESC
+order by company_name DESC;
 
 -- 5. Write a query that returns the five distributors with the highest average movie budget.
 
@@ -71,7 +70,7 @@ ON domestic_distributor_id = distributor_id
 LEFT JOIN rating
 USING (movie_id)
 where headquarters NOT LIKE'%CA%'
-GROUP BY imdb_rating, film_title
+GROUP BY imdb_rating, film_title, company_name
 ORDER BY imdb_rating DESC
 
 
@@ -80,7 +79,7 @@ ORDER BY imdb_rating DESC
 
 SELECT
   CASE WHEN length_in_min > 120 THEN 'Over 2 Hours' ELSE 'Under 2 Hours' END AS length_category,
-  AVG(imdb_rating)
+  round(AVG(imdb_rating),2)
 FROM specs
 LEFT JOIN rating
 USING (movie_id)
